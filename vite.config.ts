@@ -14,18 +14,15 @@ function getHomepageBase(): string {
       return pathname.endsWith("/") ? pathname : pathname + "/";
     }
   } catch (e) {
-    // ignore and fallback to '/'
+    // ignore and fallback below
   }
-  return "/";
+  // FALLBACK: use relative base so assets load regardless of hosting path
+  return "./";
 }
 
 const base = process.env.VITE_BASE_PATH || getHomepageBase();
 
 export default defineConfig(({ mode }) => ({
-  // For GitHub Pages deployment, set the base path to your repository name
-  // e.g., https://username.github.io/repo-name/ -> base: "/repo-name/"
-  // For user/organization sites (e.g., https://username.github.io/), use base: "/"
-  // You can also set VITE_BASE_PATH environment variable to override this
   base,
   server: {
     host: "::",
