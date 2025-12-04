@@ -20,8 +20,7 @@
     "test": "vitest --run",
     "format.fix": "prettier --write .",
     "typecheck": "tsc",
-    "eject": "react-scripts eject",
-    "predeploy": "VITE_BASE_PATH=./ npm run build",
+    "predeploy": "npm run build:client",
     "deploy": "gh-pages -d dist/spa"
   },
   "dependencies": {
