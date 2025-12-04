@@ -1,7 +1,6 @@
 {
   "name": "dyanamic-completion-guide",
   "version": "0.1.0",
-  "private": false,
   "type": "module",
   "homepage": "https://academyproduct.github.io/dyanamic_completion_guide/",
   "pkg": {
@@ -13,9 +12,14 @@
     ]
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "dev": "vite",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "vite build",
+    "build:server": "vite build --config vite.config.server.ts",
+    "start": "node dist/server/node-build.mjs",
+    "test": "vitest --run",
+    "format.fix": "prettier --write .",
+    "typecheck": "tsc",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
