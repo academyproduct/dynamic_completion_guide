@@ -1,15 +1,32 @@
 import { Task, TaskPool } from '@shared/tasks';
 
-export async function loadTasks(): Promise<Task[]> {
+function getTasksUrl(): string {
+  const base = import.meta.env.VITE_BASE_PATH ?? import.meta.env.BASE_URL ?? '/';
+
+  // Build an absolute URL for tasks.json using the current origin when base is a path.
   try {
-    const response = await fetch('../tasks.json');
+    const baseHref = base.startsWith('http') ? base : window.location.origin + (base.startsWith('/') ? base : `/${base}`);
+    return new URL('tasks.json', baseHref).href;
+  } catch {
+    // Fallback: attempt a safe path join (works for typical `"/"` or `"/repo/"` base values)
+    const normalized = base.endsWith('/') ? base.slice(0, -1) : base;
+    const withLeading = normalized.startsWith('/') ? normalized : `/${normalized}`;
+    return `${withLeading}/tasks.json`;
+  }
+}
+
+export async function loadTasks(): Promise<Task[]> {
+  const tasksUrl = getTasksUrl();
+
+  try {
+    const response = await fetch(tasksUrl);
     if (!response.ok) {
       throw new Error('Failed to load tasks');
     }
     const data = await response.json();
     return data.Tasks || [];
   } catch (error) {
-    console.error('Error loading tasks:', error);
+    console.error('Error loading tasks from', tasksUrl, error);
     return [];
   }
 }
@@ -33,7 +50,7 @@ export function moveTaskToCompleted(
 ): TaskPool {
   const task = pool.assigned.find(t => t.id === taskId);
   if (!task) return pool;
-  
+
   return {
     available: pool.available,
     assigned: pool.assigned.filter(t => t.id !== taskId),
@@ -47,7 +64,7 @@ export function moveTaskFromCompletedToAssigned(
 ): TaskPool {
   const task = pool.completed.find(t => t.id === taskId);
   if (!task) return pool;
-  
+
   return {
     available: pool.available,
     assigned: [...pool.assigned, { ...task, status: 'assigned' }],
