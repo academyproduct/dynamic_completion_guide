@@ -1,20 +1,37 @@
-import { defineConfig, Plugin } from "vite";
+import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import { readFileSync } from "fs";
 import path from "path";
-import { createServer } from "./server";
+import express from "express";
 
-// https://vitejs.dev/config/
+function getHomepageBase(): string {
+  try {
+    const pkgPath = path.resolve(__dirname, "package.json");
+    const pkg = JSON.parse(readFileSync(pkgPath, "utf8"));
+    if (pkg && pkg.homepage) {
+      const url = new URL(pkg.homepage);
+      const pathname = url.pathname || "/";
+      return pathname.endsWith("/") ? pathname : pathname + "/";
+    }
+  } catch (e) {
+    // ignore and fallback to '/'
+  }
+  return "/";
+}
+
+const base = process.env.VITE_BASE_PATH || getHomepageBase();
+
 export default defineConfig(({ mode }) => ({
   // For GitHub Pages deployment, set the base path to your repository name
   // e.g., https://username.github.io/repo-name/ -> base: "/repo-name/"
   // For user/organization sites (e.g., https://username.github.io/), use base: "/"
   // You can also set VITE_BASE_PATH environment variable to override this
-  base: process.env.VITE_BASE_PATH || "/",
+  base,
   server: {
     host: "::",
     port: 8080,
     fs: {
-      allow: ["./client", "./shared"],
+      allow: [path.resolve(__dirname, "client"), path.resolve(__dirname, "shared")],
       deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
     },
   },
@@ -35,8 +52,7 @@ function expressPlugin(): Plugin {
     name: "express-plugin",
     apply: "serve", // Only apply during development (serve mode)
     configureServer(server) {
-      const app = createServer();
-
+      const app = express(); // create an express app instance
       // Add Express app as middleware to Vite dev server
       server.middlewares.use(app);
     },
