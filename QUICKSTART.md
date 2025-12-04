@@ -4,27 +4,9 @@
 
 Your GitHub Pages deployment is now ready. Here's what to do:
 
-## Deploy Now (Choose One Method)
+## Deploy Now
 
-### Method 1: GitHub Actions (Easiest) ⭐
-
-1. **Enable in GitHub**:
-   - Go to: Repository → Settings → Pages
-   - Source: Select "GitHub Actions"
-
-2. **Push your code**:
-
-   ```bash
-   git add .
-   git commit -m "Fix GitHub Pages deployment"
-   git push origin main
-   ```
-
-3. **Done!** GitHub automatically builds and deploys.
-   - Monitor: Actions tab in your repo
-   - Live at: https://academyproduct.github.io/dynamic_completion_guide/
-
-### Method 2: Manual Deploy
+Just run this one command:
 
 ```bash
 npm run deploy
@@ -32,18 +14,18 @@ npm run deploy
 
 That's it! This builds and deploys in one command.
 
+Your site will be live at: https://academyproduct.github.io/dynamic_completion_guide/
+
 ## What Was Fixed
 
 1. ✅ React Router basename (routes now work correctly)
 2. ✅ Windows PowerShell compatibility
-3. ✅ GitHub Actions workflow added
-4. ✅ Asset paths configured correctly
+3. ✅ Asset paths configured correctly
 
 ## Files Changed
 
 - `client/App.tsx` - Router basename fix
 - `package.json` - Scripts fixed
-- `.github/workflows/deploy.yml` - Auto-deployment
 - `DEPLOYMENT.md` - Full documentation
 - `FIXES_APPLIED.md` - Detailed explanation
 
