@@ -1,7 +1,7 @@
 {
   "name": "dyanamic-completion-guide",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "type": "module",
   "homepage": "https://academyproduct.github.io/dyanamic_completion_guide/",
   "pkg": {
