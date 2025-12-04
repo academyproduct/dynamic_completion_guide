@@ -2,7 +2,7 @@ import { Task, TaskPool } from '@shared/tasks';
 
 export async function loadTasks(): Promise<Task[]> {
   try {
-    const response = await fetch('/tasks.json');
+    const response = await fetch('../tasks.json');
     if (!response.ok) {
       throw new Error('Failed to load tasks');
     }
