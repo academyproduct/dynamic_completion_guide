@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
   // e.g., https://username.github.io/repo-name/ -> base: "/repo-name/"
   // For user/organization sites (e.g., https://username.github.io/), use base: "/"
   // You can also set VITE_BASE_PATH environment variable to override this
-  base: process.env.VITE_BASE_PATH || "/",
+  base: process.env.VITE_BASE_PATH || "/dyanamic_completion_guide/",
   server: {
     host: "::",
     port: 8080,

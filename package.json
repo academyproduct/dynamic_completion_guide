@@ -1,8 +1,7 @@
 {
-  "name": "dyanamic-completion-guide",
-  "version": "0.1.0",
+  "name": "fusion-starter",
+  "private": true,
   "type": "module",
-  "homepage": "https://academyproduct.github.io/dyanamic_completion_guide/",
   "pkg": {
     "assets": [
       "dist/spa/*"
@@ -19,10 +18,7 @@
     "start": "node dist/server/node-build.mjs",
     "test": "vitest --run",
     "format.fix": "prettier --write .",
-    "typecheck": "tsc",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "typecheck": "tsc"
   },
   "dependencies": {
     "dotenv": "^17.2.1",
@@ -78,7 +74,6 @@
     "date-fns": "^4.1.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.12",
-    "gh-pages": "^6.3.0",
     "globals": "^16.3.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.539.0",
