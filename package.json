@@ -21,8 +21,8 @@
     "format.fix": "prettier --write .",
     "typecheck": "tsc",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "VITE_BASE_PATH=/dynamic_completion_guide/ npm run build",
+    "deploy": "gh-pages -d dist/spa"
   },
   "dependencies": {
     "dotenv": "^17.2.1",
