@@ -3,7 +3,7 @@
     {
       "id": 0,
       "module": 1,
-      "unit": "Foundations of Psychology",
+      "unit": "Foundations of Psychology1",
       "page": "Introduction",
       "activity_type": "read",
       "weight": 15.0
@@ -11,7 +11,7 @@
     {
       "id": 1,
       "module": 1,
-      "unit": "Foundations of Psychology",
+      "unit": "Foundations of Psychology2",
       "page": "Understanding Psychology",
       "activity_type": "read",
       "weight": 15.0
@@ -19,7 +19,7 @@
     {
       "id": 2,
       "module": 1,
-      "unit": "Foundations of Psychology",
+      "unit": "Foundations of Psychology3",
       "page": "Summary & Lightning Round",
       "activity_type": "review",
       "weight": 8.0
@@ -27,7 +27,7 @@
     {
       "id": 3,
       "module": 1,
-      "unit": "Foundations of Psychology",
+      "unit": "Foundations of Psychology4",
       "page": "Major Schools of Thought",
       "activity_type": "read",
       "weight": 15.0
@@ -35,7 +35,7 @@
     {
       "id": 4,
       "module": 1,
-      "unit": "Foundations of Psychology",
+      "unit": "Foundations of Psychology5",
       "page": "Summary & Lightning Round",
       "activity_type": "review",
       "weight": 8.0
@@ -43,7 +43,7 @@
     {
       "id": 5,
       "module": 1,
-      "unit": "Foundations of Psychology",
+      "unit": "Foundations of Psychology6",
       "page": "Roles of Psychologists",
       "activity_type": "read",
       "weight": 15.0
@@ -51,7 +51,7 @@
     {
       "id": 6,
       "module": 1,
-      "unit": "Foundations of Psychology",
+      "unit": "Foundations of Psychology7",
       "page": "Summary & Lightning Round",
       "activity_type": "review",
       "weight": 8.0
@@ -59,7 +59,7 @@
     {
       "id": 7,
       "module": 1,
-      "unit": "Foundations of Psychology",
+      "unit": "Foundations of Psychology8",
       "page": "Research in Psychology",
       "activity_type": "read",
       "weight": 15.0
@@ -67,7 +67,7 @@
     {
       "id": 8,
       "module": 1,
-      "unit": "Foundations of Psychology",
+      "unit": "Foundations of Psychology9",
       "page": "Summary & Lightning Round",
       "activity_type": "review",
       "weight": 8.0
@@ -75,7 +75,7 @@
     {
       "id": 9,
       "module": 1,
-      "unit": "Foundations of Psychology",
+      "unit": "Foundations of Psychology10",
       "page": "Ethics and Challenges",
       "activity_type": "read",
       "weight": 15.0
@@ -83,7 +83,7 @@
     {
       "id": 10,
       "module": 1,
-      "unit": "Foundations of Psychology",
+      "unit": "Foundations of Psychology11",
       "page": "Summary & Lightning Round",
       "activity_type": "review",
       "weight": 8.0
@@ -91,7 +91,7 @@
     {
       "id": 11,
       "module": 1,
-      "unit": "Foundations in Psychology",
+      "unit": "Foundations in Psychology12",
       "page": "Module Summary",
       "activity_type": "review",
       "weight": 10.0
@@ -99,7 +99,7 @@
     {
       "id": 12,
       "module": 1,
-      "unit": "Foundations in Psychology",
+      "unit": "Foundations in Psychology13",
       "page": "Practice Activities",
       "activity_type": "test",
       "weight": 18.0
@@ -107,7 +107,7 @@
     {
       "id": 13,
       "module": 1,
-      "unit": "Foundations in Psychology",
+      "unit": "Foundations in Psychology14",
       "page": "Guided AI Activity",
       "activity_type": "review",
       "weight": 12.0
@@ -115,7 +115,7 @@
     {
       "id": 14,
       "module": 2,
-      "unit": "Biological Perspectives",
+      "unit": "Biological Perspectives15",
       "page": "Introduction",
       "activity_type": "read",
       "weight": 15.0
@@ -123,7 +123,7 @@
     {
       "id": 15,
       "module": 2,
-      "unit": "Biological Perspectives",
+      "unit": "Biological Perspectives16",
       "page": "Neurons & Nervous System",
       "activity_type": "read",
       "weight": 15.0
@@ -131,7 +131,7 @@
     {
       "id": 16,
       "module": 2,
-      "unit": "Biological Perspectives",
+      "unit": "Biological Perspectives17",
       "page": "Summary & Lightning Round",
       "activity_type": "review",
       "weight": 8.0
@@ -139,7 +139,7 @@
     {
       "id": 17,
       "module": 2,
-      "unit": "Biological Perspectives",
+      "unit": "Biological Perspectives18",
       "page": "The Brain",
       "activity_type": "read",
       "weight": 15.0
@@ -147,7 +147,7 @@
     {
       "id": 18,
       "module": 2,
-      "unit": "Biological Perspectives",
+      "unit": "Biological Perspectives19",
       "page": "Summary & Lightning Round",
       "activity_type": "review",
       "weight": 8.0
@@ -155,7 +155,7 @@
     {
       "id": 19,
       "module": 2,
-      "unit": "Biological Perspectives",
+      "unit": "Biological Perspectives20",
       "page": "The Endocrine System",
       "activity_type": "read",
       "weight": 15.0
@@ -163,7 +163,7 @@
     {
       "id": 20,
       "module": 2,
-      "unit": "Biological Perspectives",
+      "unit": "Biological Perspectives21",
       "page": "Summary & Lightning Round",
       "activity_type": "review",
       "weight": 8.0
@@ -171,7 +171,7 @@
     {
       "id": 21,
       "module": 2,
-      "unit": "Biological Perspectives",
+      "unit": "Biological Perspectives22",
       "page": "Sensation",
       "activity_type": "read",
       "weight": 15.0
@@ -179,7 +179,7 @@
     {
       "id": 22,
       "module": 2,
-      "unit": "Biological Perspectives",
+      "unit": "Biological Perspectives23",
       "page": "Summary & Lightning Round",
       "activity_type": "review",
       "weight": 8.0
@@ -187,7 +187,7 @@
     {
       "id": 23,
       "module": 2,
-      "unit": "Biological Perspectives",
+      "unit": "Biological Perspectives24",
       "page": "Perception",
       "activity_type": "read",
       "weight": 15.0
@@ -195,7 +195,7 @@
     {
       "id": 24,
       "module": 2,
-      "unit": "Biological Perspectives",
+      "unit": "Biological Perspectives25",
       "page": "Summary & Lightning Round",
       "activity_type": "review",
       "weight": 8.0
@@ -203,7 +203,7 @@
     {
       "id": 25,
       "module": 2,
-      "unit": "Biological Perspectives",
+      "unit": "Biological Perspectives26",
       "page": "Module Summary",
       "activity_type": "review",
       "weight": 10.0
@@ -211,7 +211,7 @@
     {
       "id": 26,
       "module": 2,
-      "unit": "Biological Perspectives",
+      "unit": "Biological Perspectives27",
       "page": "Practice Activities",
       "activity_type": "test",
       "weight": 18.0
@@ -219,7 +219,7 @@
     {
       "id": 27,
       "module": 2,
-      "unit": "Biological Perspectives",
+      "unit": "Biological Perspectives28",
       "page": "Guided AI Activity",
       "activity_type": "review",
       "weight": 12.0
@@ -227,7 +227,7 @@
     {
       "id": 28,
       "module": 3,
-      "unit": "Theories of Memory",
+      "unit": "Theories of Memory29",
       "page": "Introduction",
       "activity_type": "read",
       "weight": 15.0
@@ -235,7 +235,7 @@
     {
       "id": 29,
       "module": 3,
-      "unit": "Theories of Memory",
+      "unit": "Theories of Memory30",
       "page": "Summary & Lightning Round",
       "activity_type": "review",
       "weight": 8.0
