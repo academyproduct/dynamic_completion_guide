@@ -226,7 +226,7 @@ export default function Index() {
     <div className="min-h-screen bg-white py-20 px-4 sm:px-8 md:px-16 lg:px-32">
       <div className="max-w-[1289px] mx-auto flex flex-col items-center gap-10">
         <h1 className="text-4xl sm:text-5xl font-bold text-black text-center font-lato">
-          Dynamic Completion Guide
+          Completion Guide
         </h1>
 
         <div className="max-w-[911px] text-center">
@@ -236,8 +236,7 @@ export default function Index() {
           </p>
           <p className="text-base text-black font-lato mt-4">
             First, let's set up your weekly schedule. Choose the days you can commit to. Next,
-            list the number of hours for each day. Then select <span className="font-bold">Submit</span>. (If your schedule changes, you can make
-            revisions at the week-by-week level later.)
+            list the number of hours for each day. Then select <span className="font-bold">Submit</span>.
           </p>
           <p className="text-base text-black font-lato mt-4">
             <span className="font-bold">Note: </span>
@@ -326,7 +325,7 @@ export default function Index() {
               {warnings.exceededDate && (
                 <div className="w-full bg-red-50 border-2 border-red-300 rounded-lg p-4">
                   <p className="text-red-700 text-base font-bold font-lato">
-                    ⚠️ The hours you have submitted will cause you to fall off track for your desired completion date.
+                    ⚠️ The hours you have submitted are insufficient for you to finish your course by the desired completion date.
                   </p>
                 </div>
               )}
