@@ -5,7 +5,7 @@
       "module": 1,
       "unit": "Foundations of Psychology",
       "page": "Introduction1",
-      "activity_type": "reading & KC",
+      "activity_type": "tasks: Reading & Knowledge Check",
       "weight": 15.0
     },
     {
@@ -28,7 +28,7 @@
       "id": 3,
       "module": 1,
       "unit": "Foundations of Psychology",
-      "page": "Major Schools of Thought4",
+      "page": "",
       "activity_type": "read",
       "weight": 15.0
     },
@@ -36,8 +36,8 @@
       "id": 4,
       "module": 1,
       "unit": "Foundations of Psychology",
-      "page": "Summary & Lightning Round5",
-      "activity_type": "review",
+      "page": "",
+      "activity_type": "read",
       "weight": 8.0
     },
     {
