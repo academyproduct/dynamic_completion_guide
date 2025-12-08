@@ -231,7 +231,7 @@ export default function Index() {
 
         <div className="max-w-[911px] text-center">
           <p className="text-base text-black font-lato">
-            Ready to get organized and stay on track? You can generate a <span className="font-bold">Dynamic Completion Guide</span> by filling out the
+            Ready to get organized and stay on track? You can generate a <span className="font-bold">Completion Guide</span> by filling out the
             following fields.
           </p>
           <p className="text-base text-black font-lato mt-4">
