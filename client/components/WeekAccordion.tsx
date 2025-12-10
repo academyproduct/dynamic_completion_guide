@@ -13,7 +13,7 @@ interface WeekAccordionProps {
   minutes: Record<string, number>;
   dayAssignments: DayTaskAssignment[];
   checkedTaskIds: number[];
-  onTaskToggle: (taskId: number) => void;
+  onTaskToggle: (weekNumber: number, dayKey: string, taskId: number) => void;
   onWeekOverride?: (days: string[], minutes: Record<string, number>) => void;
 }
 
