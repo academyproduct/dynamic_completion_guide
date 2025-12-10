@@ -6,6 +6,8 @@ import { loadTasks, initializeTaskPool } from "@/lib/taskLoader";
 import { greedyScheduleTasks, rescheduleWeek, type EnhancedWeekSchedule } from "@/lib/scheduler";
 import { minutesToDisplay } from "@/lib/timeUtils";
 import type { Task, TaskPool } from "@shared/tasks";
+import { sendCheckboxXapi } from "@/lib/xapi";
+
 
 const WEEKDAYS = [
   { key: "M", label: "M", name: "Monday" },
