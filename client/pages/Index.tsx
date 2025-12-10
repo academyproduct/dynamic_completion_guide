@@ -104,17 +104,38 @@ export default function Index() {
     setMinutesPerDay((prev) => ({ ...prev, [dayKey]: minutes }));
   };
 
-  const handleTaskToggle = (taskId: number) => {
-    setCheckedTaskIds((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(taskId)) {
-        newSet.delete(taskId);
-      } else {
-        newSet.add(taskId);
-      }
-      return newSet;
-    });
-  };
+const handleTaskToggle = (weekNumber: number, dayKey: string, taskId: number) => {
+  setCheckedTaskIds((prev) => {
+    const newSet = new Set(prev);
+    const wasChecked = newSet.has(taskId);
+    const willBeChecked = !wasChecked;
+
+    if (willBeChecked) {
+      newSet.add(taskId);
+    } else {
+      newSet.delete(taskId);
+    }
+
+    // Look up the full Task object for xAPI context
+    const week = weeks.find((w) => w.weekNumber === weekNumber);
+    const assignment = week?.dayAssignments?.find((a) => a.day === dayKey);
+    const task = assignment?.tasks.find((t) => t.id === taskId);
+
+    if (task) {
+      sendCheckboxXapi({
+        weekNumber,
+        dayKey,
+        task,
+        checked: willBeChecked,
+      });
+    } else {
+      console.warn("Task not found for xAPI", { weekNumber, dayKey, taskId });
+    }
+
+    return newSet;
+  });
+};
+
 
   const handleWeekOverride = (weekIndex: number, newDays: string[], newHours: Record<string, number>) => {
     const currentWeek = weeks[weekIndex];
