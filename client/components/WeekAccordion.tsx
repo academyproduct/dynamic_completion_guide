@@ -196,6 +196,11 @@ export default function WeekAccordion({
                 const isExpanded = expandedDayKey === day.key;
                 const dayTasks = getTasksForDay(day.key);
 
+                // Adapter to attach week/day metadata
+                const handleTaskToggleForDay = (taskId: number) => {
+                  onTaskToggle(weekNumber, day.key, taskId);
+                };
+
                 return (
                   <div key={day.key} id={`week${weekNumber}-day${dayIndex + 1}`} className="flex-shrink-0">
                     <DayBlock
@@ -209,16 +214,17 @@ export default function WeekAccordion({
                       isActive={isSelected}
                       tasks={dayTasks}
                       checkedTaskIds={checkedTaskIds}
-                      onTaskToggle={onTaskToggle}
+                      onTaskToggle={handleTaskToggleForDay}
                       onAllTasksToggle={() => {
-                        const allTaskIds = dayTasks.map(t => t.id);
-                        const allChecked = allTaskIds.every(id => checkedTaskIds.includes(id));
+                        const allTaskIds = dayTasks.map((t) => t.id);
+                        const allChecked = allTaskIds.every((id) => checkedTaskIds.includes(id));
+              
                         if (allChecked) {
-                          allTaskIds.forEach(id => onTaskToggle(id));
+                          allTaskIds.forEach((id) => handleTaskToggleForDay(id));
                         } else {
-                          allTaskIds.forEach(id => {
+                          allTaskIds.forEach((id) => {
                             if (!checkedTaskIds.includes(id)) {
-                              onTaskToggle(id);
+                              handleTaskToggleForDay(id);
                             }
                           });
                         }
@@ -228,6 +234,7 @@ export default function WeekAccordion({
                   </div>
                 );
               })}
+
             </div>
           </>
         )}
