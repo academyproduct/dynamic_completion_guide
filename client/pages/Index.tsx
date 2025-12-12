@@ -116,19 +116,40 @@ export default function Index() {
 
   const handleWeekOverride = (weekIndex: number, newDays: string[], newHours: Record<string, number>) => {
     const currentWeek = weeks[weekIndex];
-    const tasksInPreviousWeeks = weeks.slice(0, weekIndex).flatMap(w => w.tasks);
 
-    // Get all tasks that haven't been completed yet from current and future weeks
-    const allTasksInCurrentAndFutureWeeks = weeks.slice(weekIndex).flatMap(w => w.tasks);
-    const uncompletedTasksInCurrentAndFuture = allTasksInCurrentAndFutureWeeks.filter(
+    // Separate completed and uncompleted tasks in the current week
+    const completedTasksByDay: Record<string, Task[]> = {};
+    const uncompletedTasksInCurrentWeek: Task[] = [];
+
+    currentWeek.dayAssignments.forEach((assignment) => {
+      const dayCompleted: Task[] = [];
+      assignment.tasks.forEach((task) => {
+        if (checkedTaskIds.has(task.id)) {
+          dayCompleted.push(task);
+        } else {
+          uncompletedTasksInCurrentWeek.push(task);
+        }
+      });
+      if (dayCompleted.length > 0) {
+        completedTasksByDay[assignment.day] = dayCompleted;
+      }
+    });
+
+    // Get all tasks that haven't been completed yet from future weeks
+    const allTasksInFutureWeeks = weeks.slice(weekIndex + 1).flatMap(w => w.tasks);
+    const uncompletedTasksInFutureWeeks = allTasksInFutureWeeks.filter(
       t => !checkedTaskIds.has(t.id)
     );
+
+    // Combine uncompleted tasks from current and future weeks
+    const allUncompletedTasksToReallocate = [...uncompletedTasksInCurrentWeek, ...uncompletedTasksInFutureWeeks];
 
     const { updatedWeek, remainingTasks: unallocated } = rescheduleWeek(
       currentWeek,
       newDays,
       newHours,
-      uncompletedTasksInCurrentAndFuture
+      allUncompletedTasksToReallocate,
+      completedTasksByDay
     );
 
     const newWeeks = [...weeks];
@@ -136,7 +157,7 @@ export default function Index() {
 
     // Re-schedule remaining weeks if tasks were freed up
     if (unallocated.length > 0) {
-      // Remove the current week and all following weeks, we'll rebuild them
+      // Remove all weeks after the current one, we'll rebuild them
       newWeeks.splice(weekIndex + 1);
 
       // If there are more weeks after this, use their original schedule as template
@@ -226,24 +247,21 @@ export default function Index() {
     <div className="min-h-screen bg-white py-20 px-4 sm:px-8 md:px-16 lg:px-32">
       <div className="max-w-[1289px] mx-auto flex flex-col items-center gap-10">
         <h1 className="text-4xl sm:text-5xl font-bold text-black text-center font-lato">
-          Completion Guide
+          American Politics & the U.S. Constitution Completion Guide
         </h1>
 
         <div className="max-w-[911px] text-center">
           <p className="text-base text-black font-lato">
-            Ready to get organized and stay on track? You can generate a <span className="font-bold">Completion Guide</span> by filling out the
-            following fields.
+            Ready to get organized and stay on track? You can generate an <span className="font-bold">Interactive American Politics & the U.S. Constitution Completion Guide</span> by filling out the following fields.
           </p>
           <p className="text-base text-black font-lato mt-4">
-            First, let's set up your weekly schedule. Choose the days you can commit to. Next,
-            list the number of hours for each day. Then select <span className="font-bold">Submit</span>.
+            First, choose the date by which you want to be finished with your course. When adding this target course completion date,
+            <span className="font-bold">check the length of your course access period. </span>
+             If you're unsure when your access to your course expires, navigate to the American Politics & the U.S. Constitution page on the dashboard and look for the date to the right of the Resume button. 
+            <span className="font-bold">If you do not complete your course before your access period ends, you will incur additional tuition charges.</span>
           </p>
           <p className="text-base text-black font-lato mt-4">
-            <span className="font-bold">Note: </span>
-            When adding your desired completion date, be sure to consider other courses you're
-            taking and check your access period. If you're unsure of the date your access period
-            expires navigate to the dashboard. If you go beyond that, you may incur additional
-            tuition charges.
+            Next, let's set up your daily and weekly schedule. Choose the days you can commit to working on your coursework and select the number of hours/minutes you can dedicate each day. Then select <span className="font-bold">Submit.</span>
           </p>
         </div>
 
@@ -329,19 +347,39 @@ export default function Index() {
                   </p>
                 </div>
               )}
-              {weeks.map((week, index) => (
-                <WeekAccordion
-                  key={`week-${week.weekNumber}`}
-                  weekNumber={week.weekNumber}
-                  isOpen={index === 0}
-                  days={week.days}
-                  minutes={week.hours}
-                  dayAssignments={week.dayAssignments || []}
-                  checkedTaskIds={Array.from(checkedTaskIds)}
-                  onTaskToggle={handleTaskToggle}
-                  onWeekOverride={(newDays, newMinutes) => handleWeekOverride(index, newDays, newMinutes)}
-                />
-              ))}
+              {(() => {
+                // Find the last day with tasks
+                let lastWeekWithTasks = -1;
+                let lastDayWithTasks = "";
+
+                for (let i = weeks.length - 1; i >= 0; i--) {
+                  const week = weeks[i];
+                  for (let j = week.dayAssignments.length - 1; j >= 0; j--) {
+                    if (week.dayAssignments[j].tasks.length > 0) {
+                      lastWeekWithTasks = i;
+                      lastDayWithTasks = week.dayAssignments[j].day;
+                      break;
+                    }
+                  }
+                  if (lastWeekWithTasks !== -1) break;
+                }
+
+                return weeks.map((week, index) => (
+                  <WeekAccordion
+                    key={`week-${week.weekNumber}`}
+                    weekNumber={week.weekNumber}
+                    isOpen={index === 0}
+                    days={week.days}
+                    minutes={week.hours}
+                    dayAssignments={week.dayAssignments || []}
+                    checkedTaskIds={Array.from(checkedTaskIds)}
+                    onTaskToggle={handleTaskToggle}
+                    onWeekOverride={(newDays, newMinutes) => handleWeekOverride(index, newDays, newMinutes)}
+                    isFinalWeek={index === lastWeekWithTasks}
+                    finalDayKey={index === lastWeekWithTasks ? lastDayWithTasks : ""}
+                  />
+                ));
+              })()}
             </>
           ) : submitted ? (
             <div className="text-center text-sm text-slate-500">No tasks to display. Check your schedule settings.</div>

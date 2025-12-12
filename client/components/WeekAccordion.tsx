@@ -15,6 +15,8 @@ interface WeekAccordionProps {
   checkedTaskIds: number[];
   onTaskToggle: (taskId: number) => void;
   onWeekOverride?: (days: string[], minutes: Record<string, number>) => void;
+  isFinalWeek?: boolean;
+  finalDayKey?: string;
 }
 
 const DAY_DEFINITIONS = [
@@ -36,6 +38,8 @@ export default function WeekAccordion({
   checkedTaskIds,
   onTaskToggle,
   onWeekOverride,
+  isFinalWeek = false,
+  finalDayKey = "",
 }: WeekAccordionProps) {
   const [expanded, setExpanded] = useState(isOpen);
   const [expandedDayKey, setExpandedDayKey] = useState<string>(days.length > 0 ? days[0] : "");
@@ -195,6 +199,7 @@ export default function WeekAccordion({
                 const isSelected = selectedDays.includes(day.key);
                 const isExpanded = expandedDayKey === day.key;
                 const dayTasks = getTasksForDay(day.key);
+                const isFinalDay = isFinalWeek && day.key === finalDayKey;
 
                 return (
                   <div key={day.key} id={`week${weekNumber}-day${dayIndex + 1}`} className="flex-shrink-0">
@@ -224,6 +229,7 @@ export default function WeekAccordion({
                         }
                       }}
                       isReadOnly={false}
+                      isFinalDay={isFinalDay}
                     />
                   </div>
                 );

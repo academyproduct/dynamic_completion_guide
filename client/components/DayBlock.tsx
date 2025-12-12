@@ -15,6 +15,7 @@ interface DayBlockProps {
   onTaskToggle: (id: number) => void;
   onAllTasksToggle: () => void;
   isReadOnly?: boolean;
+  isFinalDay?: boolean;
 }
 
 export default function DayBlock({
@@ -27,13 +28,14 @@ export default function DayBlock({
   onTaskToggle,
   onAllTasksToggle,
   isReadOnly = false,
+  isFinalDay = false,
 }: DayBlockProps) {
   const allChecked = tasks.length > 0 && tasks.every(t => checkedTaskIds.includes(t.id));
   const incompleteCount = tasks.filter(t => !checkedTaskIds.includes(t.id)).length;
 
   if (isExpanded) {
     return (
-      <div className="w-80 h-[300px] p-4 flex flex-col gap-3 border-4 border-brand-teal bg-white shrink-0">
+      <div className={cn("w-80 h-[300px] p-4 flex flex-col gap-3 border-4 shrink-0", isFinalDay ? "border-red-500 bg-red-50" : "border-brand-teal bg-white")}>
         <div className="flex items-center gap-2">
           <input
             type="checkbox"
@@ -49,23 +51,32 @@ export default function DayBlock({
           {tasks.length === 0 ? (
             <p className="text-black text-sm text-center py-4">No tasks assigned</p>
           ) : (
-            tasks.map((task) => (
-              <div key={task.id} id={`task-${task.id}`} className="flex items-start gap-2">
-                <input
-                  type="checkbox"
-                  checked={checkedTaskIds.includes(task.id)}
-                  onChange={() => onTaskToggle(task.id)}
-                  disabled={isReadOnly}
-                  className="w-6 h-6 rounded-full border border-brand-lightgrey cursor-pointer shrink-0 mt-0.5 disabled:cursor-not-allowed"
-                />
-                <div className="flex-1 min-w-0">
-                  <p className="text-black text-base font-bold font-lato">{task.unit}</p>
-                  <p className="text-black text-sm font-normal font-lato ml-6 break-words">
-                    {task.page} ({task.activity_type})
+            <>
+              {tasks.map((task) => (
+                <div key={task.id} id={`task-${task.id}`} className="flex items-start gap-2">
+                  <input
+                    type="checkbox"
+                    checked={checkedTaskIds.includes(task.id)}
+                    onChange={() => onTaskToggle(task.id)}
+                    disabled={isReadOnly}
+                    className="w-6 h-6 rounded-full border border-brand-lightgrey cursor-pointer shrink-0 mt-0.5 disabled:cursor-not-allowed"
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-black text-base font-bold font-lato">{task.unit}</p>
+                    <p className="text-black text-sm font-normal font-lato ml-6 break-words">
+                      {task.page} ({task.activity_type})
+                    </p>
+                  </div>
+                </div>
+              ))}
+              {isFinalDay && (
+                <div className="mt-4 pt-4 border-t-2 border-red-300 text-center">
+                  <p className="text-red-700 text-base font-bold font-lato">
+                    🎉 Congratulations, you've completed the course!
                   </p>
                 </div>
-              </div>
-            ))
+              )}
+            </>
           )}
         </div>
       </div>
@@ -78,7 +89,9 @@ export default function DayBlock({
       disabled={!isActive}
       className={cn(
         "w-[84px] h-[300px] relative shrink-0 border-2 flex items-center justify-center transition-all",
-        isActive
+        isFinalDay
+          ? "bg-red-600 border-red-600 cursor-pointer hover:shadow-lg"
+          : isActive
           ? "cursor-pointer bg-brand-navy border-brand-navy hover:shadow-lg"
           : "bg-brand-grey border-brand-grey cursor-not-allowed opacity-50"
       )}
