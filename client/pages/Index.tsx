@@ -256,9 +256,9 @@ export default function Index() {
           </p>
           <p className="text-base text-black font-lato mt-4">
             First, choose the date by which you want to be finished with your course. When adding this target course completion date,
-            <span className="font-bold">check the length of your course access period. </span>
-             If you're unsure when your access to your course expires, navigate to the American Politics & the U.S. Constitution page on the dashboard and look for the date to the right of the Resume button. 
-            <span className="font-bold">If you do not complete your course before your access period ends, you will incur additional tuition charges.</span>
+            <span className="font-bold"> check the length of your course access period. </span>
+             If you're unsure when your access to your course expires, navigate to the American Politics & the U.S. Constitution page on the dashboard and look for the date to the right of the Resume button.
+            <span className="font-bold"> If you do not complete your course before your access period ends, you will incur additional tuition charges.</span>
           </p>
           <p className="text-base text-black font-lato mt-4">
             Next, let's set up your daily and weekly schedule. Choose the days you can commit to working on your coursework and select the number of hours/minutes you can dedicate each day. Then select <span className="font-bold">Submit.</span>
