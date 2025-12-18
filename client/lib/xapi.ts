@@ -34,11 +34,7 @@ export function sendCheckboxXapi(ctx: CheckboxXapiContext) {
   const { weekNumber, dayKey, task, checked } = ctx;
 
   // Derive a human-readable label for the task
-  const taskLabel =
-    // adjust these fields to match your Task type
-    (task as any).title ??
-    (task as any).name ??
-    String(task.id);
+  const taskLabel = `Module ${task.module} · ${task.unit} · Page ${task.page} · ${task.activity_type}`;
 
   // Debug log so you can verify things before wiring to the LRS
   console.log("[xAPI] Checkbox toggled", {
