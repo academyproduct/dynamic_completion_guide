@@ -110,11 +110,8 @@ const handleTaskToggle = (weekNumber: number, dayKey: string, taskId: number) =>
     const wasChecked = newSet.has(taskId);
     const willBeChecked = !wasChecked;
 
-    if (willBeChecked) {
-      newSet.add(taskId);
-    } else {
-      newSet.delete(taskId);
-    }
+    if (willBeChecked) newSet.add(taskId);
+    else newSet.delete(taskId);
 
     // Look up the full Task object for xAPI context
     const week = weeks.find((w) => w.weekNumber === weekNumber);
