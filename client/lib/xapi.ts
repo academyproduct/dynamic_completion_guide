@@ -19,56 +19,48 @@ export type CheckboxXapiContext = {
   checked: boolean;     // true = user just checked it, false = unchecked
 };
 
-// Optional: bridge to your existing PoC xapi.js via window
-declare global {
-  interface Window {
-    /**
-     * Optional bridge function that can be implemented in your
-     * xapi.js proof-of-concept to actually send the xAPI statement.
-     *
-     * If it's not present, we'll just log to the console.
-     */
-    sendCheckboxXapi?: (payload: {
-      weekNumber: number;
-      dayKey: string;
-      taskId: number | string;
-      taskLabel: string;
-      checked: boolean;
-    }) => void;
-  }
+/**
+ * Returns a stable pseudonymous ID for this browser/device using localStorage for testing
+ */
+function getOrCreateUserId(): string {
+  const key = "demo_actor_id";
+  const existing = localStorage.getItem(key);
+  if (existing) return existing;
+
+  const id =
+    (typeof crypto !== "undefined" && "randomUUID" in crypto && typeof crypto.randomUUID === "function")
+      ? crypto.randomUUID()
+      : `${Date.now()}-${Math.random()}`;
+
+  localStorage.setItem(key, id);
+  return id;
 }
 
 /**
  * Call this whenever a checkbox is toggled.
- * It centralizes how we translate UI context → xAPI payload.
+ * It centralizes how we translate UI context → xAPI statement → send.
  */
 export async function sendCheckboxXapi(ctx: CheckboxXapiContext) {
   const { weekNumber, dayKey, task, checked } = ctx;
 
-  // Only send on check (recommended for POC)
-  if (!checked) {
-    console.log("[xAPI] Checkbox toggled (no send on uncheck)", {
-      weekNumber, dayKey, taskId: task.id, checked,
-    });
-    return;
-  }
+  const verb = checked ? VERBS.selected : VERBS.discarded;
 
   const taskLabel = `Module ${task.module} · ${task.unit} · Page ${task.page} · ${task.activity_type}`;
 
-  // set up the actor; currently hardcoded
+  // Pseudonymous actor id (stable per browser)
+  const userId = getOrCreateUserId();
   const actor = {
-    name: "Demo Learner",
-    mbox: "mailto:demo@example.com",
+    account: {
+      homePage: "https://academyproduct.github.io/dynamic_completion_guide",
+      name: userId,
+    },
   };
 
   const statement = {
     actor,
-    verb: {
-      id: "http://id.tincanapi.com/verb/selected",
-      display: { "en-US": "selected" },
-    },
+    verb,
     object: {
-      // Make object IDs stable and meaningful
+      // Stable/meaningful activity ID for the task
       id: `https://academyproduct.github.io/dynamic_completion_guide/xapi/task/${task.id}`,
       definition: {
         name: { "en-US": taskLabel },
@@ -91,6 +83,8 @@ export async function sendCheckboxXapi(ctx: CheckboxXapiContext) {
         "https://academyproduct.github.io/dynamic_completion_guide/xapi/ext/dayKey": dayKey,
         "https://academyproduct.github.io/dynamic_completion_guide/xapi/ext/taskId": task.id,
         "https://academyproduct.github.io/dynamic_completion_guide/xapi/ext/module": task.module,
+        "https://academyproduct.github.io/dynamic_completion_guide/xapi/ext/unit": task.unit,
+        "https://academyproduct.github.io/dynamic_completion_guide/xapi/ext/page": task.page,
         "https://academyproduct.github.io/dynamic_completion_guide/xapi/ext/activity_type": task.activity_type,
       },
     },
@@ -99,7 +93,13 @@ export async function sendCheckboxXapi(ctx: CheckboxXapiContext) {
 
   try {
     await sendXapiStatement(statement);
-    console.log("[xAPI] Sent", { weekNumber, dayKey, taskId: task.id, taskLabel });
+    console.log("[xAPI] Sent", {
+      verb: verb.display["en-US"],
+      weekNumber,
+      dayKey,
+      taskId: task.id,
+      taskLabel,
+    });
   } catch (err) {
     console.error("[xAPI] Failed to send", err);
   }
