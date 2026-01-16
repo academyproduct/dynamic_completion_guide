@@ -1,6 +1,6 @@
 import { LRS } from "./lrsConfig";
 
-// Simple UUID generator for statementId (good enough for POC)
+// Simple UUID helper
 function uuidv4(): string {
   // crypto.randomUUID exists in modern browsers
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) return crypto.randomUUID();
