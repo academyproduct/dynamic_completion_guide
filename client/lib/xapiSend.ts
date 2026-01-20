@@ -14,6 +14,7 @@ function uuidv4(): string {
 
 export async function sendXapiStatement(statement: unknown): Promise<void> {
   const statementId = uuidv4();
+  
   const url = `${LRS.endpoint}?statementId=${encodeURIComponent(statementId)}`;
 
   const res = await fetch(url, {
@@ -21,7 +22,6 @@ export async function sendXapiStatement(statement: unknown): Promise<void> {
     headers: {
       "Content-Type": "application/json",
       "X-Experience-API-Version": LRS.version,
-      Authorization: LRS.auth,
     },
     body: JSON.stringify(statement),
   });
