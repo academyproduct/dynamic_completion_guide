@@ -1,5 +1,5 @@
 export const LRS = {
-  endpoint: "https://watershedlrs.com/api/organizations/27437/lrs/statements",
+  endpoint: "https://7vbxdlauexfyvxm5eqfmf2e45e0jmqvx.lambda-url.us-east-1.on.aws/",
   version: "1.0.3",
-  auth: "Basic " + btoa("7bea17c52e6804:6f81e672e4b4a3"),
+  auth: "",
 };
