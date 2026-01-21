@@ -1,5 +1,5 @@
 export const LRS = {
-  endpoint: "https://7vbxdlauexfyvxm5eqfmf2e45e0jmqvx.lambda-url.us-east-1.on.aws/",
+  endpoint: "https://xa3xvwi43b.execute-api.us-east-1.amazonaws.com",
   version: "1.0.3",
   auth: "",
 };
