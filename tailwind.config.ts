@@ -61,6 +61,7 @@ export default {
           navy: "#163F6C",
           blue: "#008AFF",
           teal: "#5D9D93",
+          teallight: "#5D9D9330",
           lightblue: "#D6E8F2",
           grey: "#90939C",
           lightgrey: "#AEAEB2",

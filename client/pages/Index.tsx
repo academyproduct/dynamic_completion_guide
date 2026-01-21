@@ -279,6 +279,12 @@ export default function Index() {
           </div>
         </div>
 
+        <div className="max-w-[911px] text-center">
+          <p className="text-base text-black font-lato">
+            Next, let's set up your daily and weekly schedule. Choose the days you can commit to working on your coursework and select the number of hours/minutes you can dedicate each day. Then select <span className="font-bold">Submit.</span>
+          </p>
+        </div>
+
         <div className="w-full max-w-[1001px] bg-[rgba(214,232,242,0.45)] border-2 border-[#D6E8F2] rounded-lg p-8 flex flex-col items-center gap-8">
           <div className="w-full flex flex-col items-center gap-8">
             <h2 className="text-2xl font-bold text-black text-center font-lato">Schedule time to learn</h2>

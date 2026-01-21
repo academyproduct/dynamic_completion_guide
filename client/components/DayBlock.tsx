@@ -35,7 +35,7 @@ export default function DayBlock({
 
   if (isExpanded) {
     return (
-      <div className={cn("w-80 h-[300px] p-4 flex flex-col gap-3 border-4 shrink-0", isFinalDay ? "border-red-500 bg-red-50" : "border-brand-teal bg-white")}>
+      <div className={cn("w-80 h-[300px] p-4 flex flex-col gap-3 border-4 shrink-0", isFinalDay ? "border-brand-teal bg-brand-teallight" : "border-brand-navy bg-white")}>
         <div className="flex items-center gap-2">
           <input
             type="checkbox"
@@ -70,8 +70,8 @@ export default function DayBlock({
                 </div>
               ))}
               {isFinalDay && (
-                <div className="mt-4 pt-4 border-t-2 border-red-300 text-center">
-                  <p className="text-red-700 text-base font-bold font-lato">
+                <div className="mt-4 pt-4 border-t-2 border-brand-teal text-center">
+                  <p className="text-brand-navy text-base font-bold font-lato">
                     🎉 Congratulations, you've completed the course!
                   </p>
                 </div>
@@ -90,7 +90,7 @@ export default function DayBlock({
       className={cn(
         "w-[84px] h-[300px] relative shrink-0 border-2 flex items-center justify-center transition-all",
         isFinalDay
-          ? "bg-red-600 border-red-600 cursor-pointer hover:shadow-lg"
+          ? "bg-brand-teal border-brand-teal cursor-pointer hover:shadow-lg"
           : isActive
           ? "cursor-pointer bg-brand-navy border-brand-navy hover:shadow-lg"
           : "bg-brand-grey border-brand-grey cursor-not-allowed opacity-50"
