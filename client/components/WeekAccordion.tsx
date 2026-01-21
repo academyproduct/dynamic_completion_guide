@@ -13,7 +13,7 @@ interface WeekAccordionProps {
   minutes: Record<string, number>;
   dayAssignments: DayTaskAssignment[];
   checkedTaskIds: number[];
-  onTaskToggle: (taskId: number) => void;
+  onTaskToggle: (weekNumber: number, dayKey: string, taskId: number) => void;
   onWeekOverride?: (days: string[], minutes: Record<string, number>) => void;
   isFinalWeek?: boolean;
   finalDayKey?: string;
@@ -201,6 +201,11 @@ export default function WeekAccordion({
                 const dayTasks = getTasksForDay(day.key);
                 const isFinalDay = isFinalWeek && day.key === finalDayKey;
 
+                // Adapter to attach week/day metadata
+                const handleTaskToggleForDay = (taskId: number) => {
+                  onTaskToggle(weekNumber, day.key, taskId);
+                };
+
                 return (
                   <div key={day.key} id={`week${weekNumber}-day${dayIndex + 1}`} className="flex-shrink-0">
                     <DayBlock
@@ -214,16 +219,17 @@ export default function WeekAccordion({
                       isActive={isSelected}
                       tasks={dayTasks}
                       checkedTaskIds={checkedTaskIds}
-                      onTaskToggle={onTaskToggle}
+                      onTaskToggle={handleTaskToggleForDay}
                       onAllTasksToggle={() => {
-                        const allTaskIds = dayTasks.map(t => t.id);
-                        const allChecked = allTaskIds.every(id => checkedTaskIds.includes(id));
+                        const allTaskIds = dayTasks.map((t) => t.id);
+                        const allChecked = allTaskIds.every((id) => checkedTaskIds.includes(id));
+              
                         if (allChecked) {
-                          allTaskIds.forEach(id => onTaskToggle(id));
+                          allTaskIds.forEach((id) => handleTaskToggleForDay(id));
                         } else {
-                          allTaskIds.forEach(id => {
+                          allTaskIds.forEach((id) => {
                             if (!checkedTaskIds.includes(id)) {
-                              onTaskToggle(id);
+                              handleTaskToggleForDay(id);
                             }
                           });
                         }
@@ -234,6 +240,7 @@ export default function WeekAccordion({
                   </div>
                 );
               })}
+
             </div>
           </>
         )}
